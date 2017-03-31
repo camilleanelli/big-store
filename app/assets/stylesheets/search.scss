@@ -1,0 +1,58 @@
+// Place all the styles related to the search controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.items {
+	background-color: #ccc;
+	border: 5px solid white;
+	border-radius: 10px;
+}
+
+#header {
+	padding-top: 50px;
+	background-color: #F5D76E;
+
+}
+
+#content {
+	padding-top: 50px;
+}
+
+input {
+	color: black;
+}
+#search-box {
+  margin: 1em 1em 3em;
+  width: calc(100% - 2em);
+  padding: 5px;
+  border: 2px solid black;
+  background-color: #F5D76E;
+  border-radius: 50px;
+  box-sizing: border-box;
+  color: black;
+}
+
+#facet-list,
+#container{
+  margin: auto;
+  list-style: none;
+}
+
+#facet-list li {
+  padding: 6px 0;
+  border-bottom: 3px solid #ccc;
+}
+#facet-list li input {
+  margin-right: 6px;
+}
+
+#container {
+  max-width: calc(100% - 150px - 4em);
+}
+#container li {
+  padding: 8px 0;
+}
+
+#container em {
+  background: yellow;
+}
