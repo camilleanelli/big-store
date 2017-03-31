@@ -17,137 +17,64 @@
 //= require turbolinks
 //= require_tree .
 
-
-
-
 $(document).ready(function() {
+  var applicationID = "<%= ENV['APPLICATION_ID'] %>";
+  var apiKey = "<%= ENV['API_KEY'] %>";
+  var indexName = 'big-store';
+  var client = algoliasearch(applicationID, apiKey);
+  var helper = algoliasearchHelper(client, indexName, { facets: ['category'] });
 
-	//config variables
-	var applicationID = "<%= ENV['APPLICATION_ID'] %>";
-	var apiKey = "<%= ENV['API_KEY'] %>";
-	var indexName = 'big-store';
+  helper.search();
 
-	var client = algoliasearch(applicationID, apiKey);
-	var helper = algoliasearchHelper(client, indexName, { facets: ['category'] });
+  helper.on('result', function(content) {
+    renderFacetList(content);
+    renderHits(content);
+  });
 
-	//display app by most relevant
-	helper.on('result', function(content) {
-		renderFacetList(content);
-		renderHits(content);
-	});
+  // trigger search with the search input
+  $('#search-box').on('keyup', function() {
+    var currentSearchValue = $(this).val();
+    helper.setQuery(currentSearchValue).search();
+  });
 
-	function renderHits(content) {
-		$('#container').html(function() {
-	    return $.map(content.hits, function(hit) {
-	      return '<div class="col-xs-12 col-sm-4 items"><p>' + hit._highlightResult.name.value + '</p><p>' + hit.rank + " " + hit.category + '</p><p><a href=' + '"' + hit.link + '"' + '>Buy now</a></p></div>'; 
-	    });
-	  });
-	}
+  // handle faceting filters
+  $('#facet-list').on('click', 'input[type=checkbox]', function(e) {
+    var facetValue = $(this).data('facet');
+    helper.toggleRefinement('category', facetValue).search();
+  });
 
-	$('#search-box').on('keyup', function() {
-  	helper.setQuery($(this).val()).search();
-	});
-	
-	$('#facet-list').on('click', 'input[type=checkbox]', function(e) {
-  	var facetValue = $(this).data('facet');  
-  	helper.toggleRefinement('category', facetValue).search();
-	});
 
-	function renderFacetList(content) {
-	  $('#facet-list').html(function() {
-	    return $.map(content.getFacetValues('category'), function(facet) {
-	      var checkbox = $('<input type=checkbox>')
-	        .data('facet', facet.name)
-	        .attr('id', 'fl-' + facet.name);
-	      if(facet.isRefined) checkbox.attr('checked', 'checked');
-	      var label = $('<label>').html(facet.name + ' (' + facet.count + ')')
-	                              .attr('for', 'fl-' + facet.name);
-	      return $('<li>').append(checkbox).append(label);
-	    });
-	  });
-	}
-	helper.search();
+  //display apps by lowest ranks
+  $(".lowest-btn").on('click', function() {
+    helper.setIndex('big-store_rank_asc').search();
+  });
 
-	//display apps by lowest ranks
-	$(".lowest-btn").on('click', function() {
-		var indexName = 'big-store_rank_asc';
-		var helper = algoliasearchHelper(client, indexName, { facets: ['category'] });
+  //display apps by highest ranks
+  $('.highest-btn').on('click', function() {
+    helper.setIndex('big-store_rank_desc').search();
+  });
 
-		helper.on('result', function(content) {
-			renderFacetList(content);
-			renderHits(content);
-		});
-		function renderHits(content) {
-			$('#container').html(function() {
-	    	return $.map(content.hits, function(hit) {
-	      	return '<div class="col-xs-12 col-sm-4 items"><p>' + hit._highlightResult.name.value + '</p><p>' + hit.rank + " " + hit.category + '</p><p><a href=' + '"' + hit.link + '"' + '>Buy now</a></p></div>';
-	    	});
-	  	});
-		}
-		$('#search-box').on('keyup', function() {
-	  	helper.setQuery($(this).val()).search();
-		});
-		
-		$('#facet-list').on('click', 'input[type=checkbox]', function(e) {
-	  	var facetValue = $(this).data('facet');  
-	  	helper.toggleRefinement('category', facetValue).search();
-		});
+  function renderHits(content) {
+    $('#container').html(function() {
+      return $.map(content.hits, function(hit) {
+        return '<div class="col-xs-12 col-sm-4 items"><p>' +
+          hit._highlightResult.name.value + '</p><p>' +
+          hit.rank + " " + hit.category + '</p><p><a href=' + '"' + hit.link + '"' + '>Buy now</a></p></div>';
+      });
+    });
+  }
 
-		function renderFacetList(content) {
-	  	$('#facet-list').html(function() {
-		    return $.map(content.getFacetValues('category'), function(facet) {
-		      var checkbox = $('<input type=checkbox>')
-		        .data('facet', facet.name)
-		        .attr('id', 'fl-' + facet.name);
-		      if(facet.isRefined) checkbox.attr('checked', 'checked');
-		      var label = $('<label>').html(facet.name + ' (' + facet.count + ')')
-		                              .attr('for', 'fl-' + facet.name);
-		      return $('<li>').append(checkbox).append(label);
-	    	});
-	  	});
-		}
-		helper.search();
-	});
-
-//display apps by highest ranks
-	$('.highest-btn').on('click', function() {
-		var indexName = 'big-store_rank_desc';
-		var helper = algoliasearchHelper(client, indexName, { facets: ['category'] });
-
-		helper.on('result', function(content) {
-			renderFacetList(content);
-			renderHits(content);
-		});
-		function renderHits(content) {
-			$('#container').html(function() {
-	    	return $.map(content.hits, function(hit) {
-	      	return '<div class="col-xs-12 col-sm-4 items"><p>' + hit._highlightResult.name.value + '</p><p>' + hit.rank + " " + hit.category + '</p><p><a href=' + '"' + hit.link + '"' + '>Buy now</a></p></div>';
-	      });
-	  	});
-		}
-
-		$('#search-box').on('keyup', function() {
-	  	helper.setQuery($(this).val()).search();
-		});
-		
-		$('#facet-list').on('click', 'input[type=checkbox]', function(e) {
-	  	var facetValue = $(this).data('facet');  
-	  	helper.toggleRefinement('category', facetValue).search();
-		});
-
-		function renderFacetList(content) {
-	  	$('#facet-list').html(function() {
-		    return $.map(content.getFacetValues('category'), function(facet) {
-		      var checkbox = $('<input type=checkbox>')
-		        .data('facet', facet.name)
-		        .attr('id', 'fl-' + facet.name);
-		      if(facet.isRefined) checkbox.attr('checked', 'checked');
-		      var label = $('<label>').html(facet.name + ' (' + facet.count + ')').attr('for', 'fl-' + facet.name);
-		      return $('<li>').append(checkbox).append(label);
-		    });
-		  });
-		}
-		helper.search();
-	});
-
+  function renderFacetList(content) {
+    $('#facet-list').html(function() {
+      return $.map(content.getFacetValues('category'), function(facet) {
+        var checkbox = $('<input type=checkbox>')
+          .data('facet', facet.name)
+          .attr('id', 'fl-' + facet.name);
+        if(facet.isRefined) checkbox.attr('checked', 'checked');
+        var label = $('<label>').html(facet.name + ' (' + facet.count + ')')
+          .attr('for', 'fl-' + facet.name);
+        return $('<li>').append(checkbox).append(label);
+      });
+    });
+  }
 });
