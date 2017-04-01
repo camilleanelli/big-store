@@ -16,6 +16,13 @@
 
 #content {
 	padding-top: 50px;
+
+}
+
+#pagination {
+  padding-top: 50px;
+  padding-bottom: 50px;
+
 }
 
 input {
@@ -46,9 +53,9 @@ input {
   margin-right: 6px;
 }
 
-#container {
-  max-width: calc(100% - 150px - 4em);
-}
+// #container {
+//   max-width: calc(100% - 150px - 4em);
+// }
 #container li {
   padding: 8px 0;
 }

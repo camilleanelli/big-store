@@ -59,9 +59,9 @@ $(document).ready(function() {
     console.log(content);
     $('#container').html(function() {
       return $.map(content.hits, function(hit) {
-        return '<div class="col-xs-12 col-sm-4 items"><p>' +
-          hit._highlightResult.name.value + '</p><p>' +
-          hit.rank + " " + hit.category + '</p><p><a href=' + '"' + hit.link + '"' + '>Buy now</a></p></div>';
+        return '<div class="col-xs-12 col-sm-4 items"><h4>' +
+          hit._highlightResult.name.value + '</h4><p>' +
+          " category:" + hit.category + '</p><p><a href=' + '"' + hit.link + '"' + '>Buy now !</a></p></div>';
       });
     });
   }
@@ -94,7 +94,7 @@ $(document).ready(function() {
       }
       $('.pagination').html(html);
     }
-     
+
     $('.numbers').on('click', function(e) {
       e.preventDefault();
       var link = parseInt($(this).text()) - 1;
@@ -107,8 +107,7 @@ $(document).ready(function() {
     $('.next').on('click', function(e) {
       e.preventDefault();
       helper.nextPage().search();
-      console.log(content.hits);
     });
-  }
+  } 
 
 });
