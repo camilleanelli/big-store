@@ -2,6 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+body {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+
+}
 .items {
 	background-color: #ccc;
 	border: 5px solid white;
