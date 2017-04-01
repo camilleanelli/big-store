@@ -3,9 +3,10 @@
 	<div class="col-sm-4"><h1>Big-Store</h1></div>
 	<div class="col-sm-4">
 		Sort by: 
-		<button class="lowest-btn btn btn-outline-success">Most populare</button>
-		<button class="highest-btn btn btn-outline-success">Less populare</button>
-		<button class="relevant btn btn-outline-success">Most relevant</button>
+		<button class="lowest-btn"><a href="#">Most populare</a></button>
+		<button class="highest-btn"><a href="#">Less populare</a></button>
+		<button class="relevant"><a href="#">Most relevant</a></button>
+		<button><a href="/">Clear filters</a></button>
 	</div>
 	<div class="col-sm-4">
 		<input type="text" autocomplete="off" id="search-box" placeholder="Search an item here" />
@@ -18,6 +19,7 @@
 
 <div id="content" class="row">
 	<div class="col-xs-12 col-sm-3">
+		<h3>Search by category</h3>
 		<ul id=facet-list></ul>
 	</div>
 	<div class="col-xs-12 col-sm-9">
