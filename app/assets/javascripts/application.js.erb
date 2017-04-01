@@ -63,11 +63,16 @@ $(document).ready(function() {
   function renderHits(content) {
     console.log(content);
     $('#container').html(function() {
-      return $.map(content.hits, function(hit) {
-        return '<div class="col-xs-12 col-sm-4 items"><h4>' +
+      if(content.nbHits > 0) {
+        return $.map(content.hits, function(hit) {
+          return '<div class="col-xs-12 col-sm-4 items"><h4>' +
           hit._highlightResult.name.value + '</h4><p>' +
           " category:" + hit.category + '</p><p><a href=' + '"' + hit.link + '"' + '>Buy now !</a></p></div>';
-      });
+        });
+      }else {
+        $('.title-facet, #pagination').css('display', 'none');
+        return '<h2>No results for your research !:( </h2>';
+      }
     });
   }
 
@@ -89,7 +94,7 @@ $(document).ready(function() {
   //display pagination
   function pagination(content) {
     var html = "";
-    if(content.nbPages > 1) {
+    if(content.nbPages > 1){
       if( content.page !== 0) {
         html += '<li class="page-item"><a class="page-link previous" href="#">Previous</a></li>';
       }
@@ -123,4 +128,5 @@ $(document).ready(function() {
     $('#info-results').html(html);
   } 
 
+   
 });
