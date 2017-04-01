@@ -30,6 +30,7 @@ $(document).ready(function() {
     renderFacetList(content);
     renderHits(content);
     pagination(content);
+    infoResults(content);
   });
 
   // trigger search with the search input
@@ -55,6 +56,7 @@ $(document).ready(function() {
     helper.setIndex('big-store_rank_desc').search();
   });
 
+  //display the hits
   function renderHits(content) {
     console.log(content);
     $('#container').html(function() {
@@ -66,6 +68,7 @@ $(document).ready(function() {
     });
   }
 
+  //display categories list
   function renderFacetList(content) {
     $('#facet-list').html(function() {
       return $.map(content.getFacetValues('category'), function(facet) {
@@ -80,6 +83,7 @@ $(document).ready(function() {
     });
   }
 
+  //display pagination
   function pagination(content) {
     var html = "";
     if(content.nbPages > 1) {
@@ -108,6 +112,12 @@ $(document).ready(function() {
       e.preventDefault();
       helper.nextPage().search();
     });
+  }
+
+  //display number of results and number of ms
+  function infoResults(content) {
+    var html = "<p>" + content.nbHits + " results found in " + content.processingTimeMS + " ms</p>";
+    $('#info-results').html(html);
   } 
 
 });
