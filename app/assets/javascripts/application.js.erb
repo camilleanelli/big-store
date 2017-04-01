@@ -45,6 +45,10 @@ $(document).ready(function() {
     helper.toggleRefinement('category', facetValue).search();
   });
 
+  // display apps by most relevant
+   $(".relevant").on('click', function() {
+    helper.setIndex('big-store').search();
+  });
 
   //display apps by lowest ranks
   $(".lowest-btn").on('click', function() {

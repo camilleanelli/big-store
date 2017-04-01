@@ -1,29 +1,32 @@
-<section id="header" class="text-center row">
+
+<div id="header" class="row align-items-center">
 	<div class="col-sm-4"><h1>Big-Store</h1></div>
 	<div class="col-sm-4">
-		Sort by: <button class="lowest-btn btn btn-default">Most populare</button>
-		<button class="highest-btn btn btn-default">Less populare</button>
+		Sort by: 
+		<button class="lowest-btn btn btn-outline-success">Most populare</button>
+		<button class="highest-btn btn btn-outline-success">Less populare</button>
+		<button class="relevant btn btn-outline-success">Most relevant</button>
 	</div>
 	<div class="col-sm-4">
 		<input type="text" autocomplete="off" id="search-box" placeholder="Search an item here" />
 	</div>
-</section>
-
-<div id="info-results" class="row">
-	
 </div>
 
-<section id="content" class="row">
+<div id="info-results" class="row"></div>
+
+
+
+<div id="content" class="row">
 	<div class="col-xs-12 col-sm-3">
 		<ul id=facet-list></ul>
 	</div>
 	<div class="col-xs-12 col-sm-9">
 		<div id=container class="row"></div>
 	</div>
-</section>
+</div>
 
-<section id="pagination" class="row">
+<div id="pagination" class="row">
   <nav aria-label="Page navigation example" class="mx-auto">
     <ul class="pagination"></ul>
   </nav>
-</section>
+</div>
