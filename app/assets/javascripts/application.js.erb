@@ -29,6 +29,7 @@ $(document).ready(function() {
   helper.on('result', function(content) {
     renderFacetList(content);
     renderHits(content);
+    pagination(content);
   });
 
   // trigger search with the search input
@@ -55,6 +56,7 @@ $(document).ready(function() {
   });
 
   function renderHits(content) {
+    console.log(content);
     $('#container').html(function() {
       return $.map(content.hits, function(hit) {
         return '<div class="col-xs-12 col-sm-4 items"><p>' +
@@ -73,8 +75,40 @@ $(document).ready(function() {
         if(facet.isRefined) checkbox.attr('checked', 'checked');
         var label = $('<label>').html(facet.name + ' (' + facet.count + ')')
           .attr('for', 'fl-' + facet.name);
-        return $('<li>').append(checkbox).append(label);
+        return  $('<li>').append(checkbox).append(label);
       });
     });
   }
+
+  function pagination(content) {
+    var html = "";
+    if(content.nbPages > 1) {
+      if( content.page !== 0) {
+        html += '<li class="page-item"><a class="page-link previous" href="#">Previous</a></li>';
+      }
+      for(var i = 1; i <= content.nbPages; i++) {
+        html += '<li class="page-item"><a class="page-link numbers" href="#">' + i + '</a></li>';
+      }
+      if(content.page + 1 !== content.nbPages) {
+        html += '<li class="page-item"><a class="page-link next" href="#">Next</a></li>';
+      }
+      $('.pagination').html(html);
+    }
+     
+    $('.numbers').on('click', function(e) {
+      e.preventDefault();
+      var link = parseInt($(this).text()) - 1;
+      helper.setPage(link).search();
+    });
+    $('.previous').on('click', function(e) {
+      e.preventDefault();
+      helper.previousPage().search();
+    });
+    $('.next').on('click', function(e) {
+      e.preventDefault();
+      helper.nextPage().search();
+      console.log(content.hits);
+    });
+  }
+
 });
