@@ -1,25 +1,35 @@
+<div class="spacer"></div>
+<div class="container">
+	<section class="padding-sections row">
+	  <input class="mx-auto" type="text" autocomplete="off" id="search-box" placeholder="Search an application" />
+</section>
 
-<div id="header" class="row align-items-center">
-	<div class="col-sm-4"><h1>Big-Store</h1></div>
-	<div class="col-sm-4">
-		Sort by: 
-		<button class="lowest-btn"><a href="#">Most populare</a></button>
-		<button class="highest-btn"><a href="#">Less populare</a></button>
-		<button class="relevant"><a href="#">Most relevant</a></button>
-		<button><a href="/">Clear filters</a></button>
+<div class='row'>
+	<div class='col-lg-6 offset-lg-3'>
+		<div id="info-results"></div>
 	</div>
-	<div class="col-sm-4">
-		<input type="text" autocomplete="off" id="search-box" placeholder="Search an item here" />
+	<div class="col-lg-3">
+		<a class="filter-dropdown dropdown-toggle" href="https://example.com" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Sort by: 
+    </a>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <a class="lowest-btn dropdown-item" href="#">Popularity</a>
+      <a class="highest-btn dropdown-item" href="#">Most relevant</a>
+      <a class="relevant dropdown-item" href="#">Less populare</a>
+    </div>
 	</div>
 </div>
 
-<div id="info-results" class="row"></div>
+
+	
+
 
 <div id="content" class="row">
-	<div class="col-xs-12 col-sm-3">
-		<h3 class="title-facet">Search by category</h3>
+	<div class="div-facets hidden-xs-down col-xs-12 col-sm-3">
+		<h3 class="title-facet">Categories</h3>
 		<ul id="facet-list"></ul>
 	</div>
+
 	<div class="col-xs-12 col-sm-9">
 		<div id=container class="row"></div>
 	</div>
@@ -29,4 +39,5 @@
   <nav aria-label="Page navigation example" class="mx-auto">
     <ul class="pagination"></ul>
   </nav>
+</div>
 </div>
