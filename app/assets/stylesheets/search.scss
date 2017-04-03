@@ -117,6 +117,19 @@ input {
   list-style: none;
 }
 
+.page-link {
+  color: rgb(191, 85, 236) !important;
+
+}
+
+
+.page-item.active .page-link {
+  z-index: 2;
+  background-color: rgb(191, 85, 236) !important;
+  border-color: rgb(191, 85, 236) !important;
+  color: white !important;
+}
+
 #facet-list li {
   padding-left: 6px;
   padding: 6px 0;

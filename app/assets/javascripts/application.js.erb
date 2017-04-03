@@ -24,7 +24,7 @@ $(document).ready(function() {
   helper.on('result', function(content) {
     renderFacetList(content);
     renderHits(content);
-    pagination(content);
+    displayPagination(content);
     infoResults(content);
   });
 
@@ -95,21 +95,37 @@ $(document).ready(function() {
       });
     });
   }
-  //display pagination
-  function pagination(content) {
-    var html = "";
-    if(content.nbPages > 1) {
-      if( content.page !== 0) {
-        html += '<li class="page-item"><a class="page-link previous" href="#">Previous</a></li>';
-      }
-      for(var i = 1; i <= content.nbPages; i++) {
-        html += '<li class="page-item"><a class="page-link numbers" href="#">' + i + '</a></li>';
-      }
-      if(content.page + 1 !== content.nbPages) {
-        html += '<li class="page-item"><a class="page-link next" href="#">Next</a></li>';
-      }
-      $('.pagination').html(html);
+
+
+
+  function displayPagination(content) {
+    var paginationResult = buildPagination(content.page + 1, content.nbPages, 6);
+    if(content.nbPages <= 1) {
+      return;
     }
+    var html = "";
+    // not on the first page
+    if( content.page !== 0) {
+      html += displayPageItem('previous', 'Previous');
+    }
+    // go to the beginning
+    if(!paginationResult.startFromFirstPage) {
+      html += displayPageItem('first-page', '<<');
+    }
+    for(var i = 0; i < paginationResult.pages.length; i++) {
+      var pageItem = paginationResult.pages[i];
+      var activeClass = pageItem.isCurrent ? "active" : "";
+      html += '<li class="page-item '+ activeClass +'"><a class="page-link numbers " href="#">' + pageItem.page + '</a></li>';
+    }
+    // go to the beginning
+    if(!paginationResult.endAtLastPage) {
+      html += displayPageItem('last-page', '>>');
+    }
+    // not on the last page
+    if(content.page + 1 !== content.nbPages) {
+      html += displayPageItem('next', 'Next');
+    }
+    $('.pagination').html(html);
     $('.numbers').on('click', function(e) {
       e.preventDefault();
       var link = parseInt($(this).text()) - 1;
@@ -123,7 +139,59 @@ $(document).ready(function() {
       e.preventDefault();
       helper.nextPage().search();
     });
+    $('.first-page').on('click', function(e) {
+      e.preventDefault();
+      helper.setPage(0).search();
+    });
+    $('.last-page').on('click', function(e) {
+      e.preventDefault();
+      console.log(helper);
+      console.log(helper.nbPages);
+      helper.setPage(helper.lastResults.nbPages - 1).search();
+    });
   }
+
+  // https://gist.github.com/trantorLiu/5924389
+  function buildPagination(currentPage, totalPage, size) {
+    var startPage, endPage, context;
+    startPage = currentPage - Math.floor(size / 2);
+    endPage = currentPage + Math.floor(size / 2);
+    if (startPage <= 0) {
+      endPage -= (startPage - 1);
+      startPage = 1;
+    }
+    if (endPage > totalPage) {
+      endPage = totalPage;
+      if (endPage - size + 1 > 0) {
+        startPage = endPage - size + 1;
+      } else {
+        startPage = 1;
+      }
+    }
+    context = {
+      startFromFirstPage: false,
+      pages: [],
+      endAtLastPage: false,
+    };
+    if (startPage === 1) {
+      context.startFromFirstPage = true;
+    }
+    for (var i = startPage; i <= endPage; i++) {
+      context.pages.push({
+        page: i,
+        isCurrent: i === currentPage,
+      });
+    }
+    if (endPage === totalPage) {
+      context.endAtLastPage = true;
+    }
+    return context;
+  }
+
+  function displayPageItem(cssClass, text) {
+    return '<li class="page-item"><a class="page-link '+ cssClass +'" href="#">'+ text +'</a></li>';
+  }
+
   //display number of results and number of ms
   function infoResults(content) {
     var html = "<p>" + content.nbHits + " results found in " + content.processingTimeMS + " ms</p>";
