@@ -10,23 +10,37 @@ body {
 
 }
 
+.categories-select {
+  margin-left: 100px;
+}
+
 .div-facets {
  .title-facet {
     margin-left: 30px;
   }
 }
 
-.filter-dropdown {
+.filter-select {
   font-size: 20px;
+  margin-left: 20px;
   color: #626262;
   &:hover {
     color: rgb(191, 85, 236);
   }
 }
 
-.sort-menu {
-  padding-right: 10px;
+.form-control {
+  color: rgb(191, 85, 236) !important;
+  margin-left: 20px;
+}
+
+#info-results {
+  margin-top: 15px;
   width: 100%;
+  padding-left: 15px;
+  p {
+    font-size: 20px;
+  }
 }
 
 .padding-sections {
@@ -134,9 +148,8 @@ input {
   padding-left: 6px;
   padding: 6px 0;
   border-bottom: 1px solid #ccc;
-  border-radius: 10px; 
   &:hover {
-    background-color: rgba(191, 85, 236, 0.7);
+    color: rgba(191, 85, 236, 0.7);
   }
 }
 #facet-list li input {
