@@ -5,7 +5,7 @@
 	</section>
   <div class="hidden-sm-up row categories-select">
      <form class="mx-auto form-inline">
-      <label class="filter-select" for="facetselect">Categories: </label>
+      <!-- <label class="filter-select" for="facetselect">Categories: </label> -->
       <select class="form-control" id="facetselect"> 
       </select>
     </form>
@@ -18,7 +18,7 @@
 						<h3 class="title-facet">Categories </h3> 
 					</div>
 					<div id="reset" class="col-lg-5 text-left">
-						<a href="#"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+						<a href="#"><i data-toggle="tooltip" data-placement="top" title="Clear categories" class="fa fa-refresh" aria-hidden="true"></i></a>
 					</div>	
 				</div>
 				<ul id="facet-list"></ul>
@@ -31,29 +31,27 @@
 					</div>
 					<div class="col-lg-4">
 						<form class="form-inline">
-							<label class="result-select" for="select-pages">Results per page</label>
+							<label class="result-select" for="select-pages">Results per page: </label>
 					    <select class="form-control" id="select-pages">
+					    	<option selected>20</option>
 					      <option>5</option>
 					      <option>10</option>
 					      <option>15</option>
-					      <option>20</option>
 					      <option>50</option>
 					    </select>
 					   </form>
 						</div>
 					<div class="col-lg-4 text-right">
 				    <form class="form-inline">
-					    <label class="filter-select" for="exampleSelect1">Sort by: </label>
-					    <select class="form-control" id="exampleSelect1">
+					    <label class="filter-select" for="filter-select">Sort by: </label>
+					    <select class="form-control" id="filter-select">
+					    	<option selected>Most relevant</option>
 					      <option>Popularity</option>
-					      <option>Most relevant</option>
 					      <option>Less populare</option>
 					    </select>
 					   </form>
   					</div>
 		    	</div>
-		    <br>
-		    <br>
 				<div id="container" class="row"></div>
 			</div>
 		</div>

@@ -67,7 +67,7 @@ $(document).ready(function() {
   
 
   // display apps by ranks and most relevant apps
-  $("#exampleSelect1").on('change', function() {
+  $("#filter-select").on('change', function() {
     if($(this).val() === "Most relevant") {
       helper.setIndex('big-store').search();
     }else if($(this).val() === "Less populare") {
@@ -82,11 +82,12 @@ $(document).ready(function() {
     console.log(content);
     $('#container').html(function() {
       if(content.nbHits > 0) {
+        $('.title-facet, #pagination, .result-select, #select-pages, #filter-select, .filter-select, #reset').css('display', 'block');
         return $.map(content.hits, function(hit) {
           return renderHit(hit);
        });
       }else {
-        $('.title-facet, #pagination').css('display', 'none');
+        $('.title-facet, #pagination, .result-select, #select-pages, #exampleSelect1, .filter-select, #reset').css('display', 'none');
         return '<div class="text-center"><h3>Sorry, no apps found :(</h3></div>';
       }
     });
@@ -95,7 +96,7 @@ $(document).ready(function() {
   // html code for a hit
   function renderHit(hit) {
     return '<div class="col-xs-12 col-sm-6 col-md-4">'+ 
-    '<a href="' + hit.link + '">' + 
+    '<a href="' + hit.link + '" target="_blank">' + 
       '<div class="ar-1-1" style="height: 200px; margin-bottom:20px; background-image: url(\'https://placeimg.com/175/175/'+hit.name+'\'); background-size: 100%;">'+
         '<div class="filter">'+
           '<p class="title-hit text-white">'+ hit._highlightResult.name.value +'</p>'+
@@ -124,12 +125,12 @@ $(document).ready(function() {
 
   // render a select categories list for mobile
   function renderFacetSelect(content) {
-    $('#facetselect').html(function() {
-      return $.map(content.getFacetValues('category'), function(facet) {
-        return '<option>' + facet.name + '</option>';
+      var html = '<option selected>Choose category</option>';
+      $.map(content.getFacetValues('category'), function(facet) {
+        return html +='<option>' + facet.name + '</option>';
       });
-    });
-  }
+      $("#facetselect").html(html);
+   }
 
 
   //display pagination
