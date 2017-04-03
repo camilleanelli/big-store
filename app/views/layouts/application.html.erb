@@ -14,8 +14,13 @@
     <div id="header">
       <div class="container">
         <div class="row align-items-center">
-          <div class="text-left"><h1>Big-Store</h1></div>
-          <div class="categories-select">
+          <div class="col-xs-6 text-left"><h1>BigStore</h1></div>
+          <div class="col-xs-6 hidden-sm-up categories-select">
+            <form class="form-inline">
+              <label class="filter-select" for="facetselect">Sort by: </label>
+              <select class="form-control" id="facetselect"> 
+              </select>
+            </form>
           </div>
         </div>
       </div>

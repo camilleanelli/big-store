@@ -26,6 +26,7 @@ $(document).ready(function() {
     renderHits(content);
     displayPagination(content);
     infoResults(content);
+    renderFacetSelect(content);
   });
 
   // trigger search with the search input
@@ -40,8 +41,26 @@ $(document).ready(function() {
     helper.toggleRefinement('category', facetValue).search();
   });
 
+  //handle facting filters for mobile
+  $('#facetselect').on('change', function() {
+    var facetValue = $(this).data('facet');
+    helper.toggleRefinement('category', facetValue).search();
+  })
 
-  // display apps by ranks and most relevant
+
+  //select to render number of results the user wants to display
+  $('#select-pages').on('change', function() {
+    var number = $(this).val();
+    helper.setQueryParameter('hitsPerPage', number).search();
+  })
+  
+  //button to clear filter categories
+  $('#reset').on('click', function() {
+    helper.clearRefinements('category').search();
+  })
+  
+
+  // display apps by ranks and most relevant apps
   $("#exampleSelect1").on('change', function() {
     if($(this).val() === "Most relevant") {
       helper.setIndex('big-store').search();
@@ -97,7 +116,17 @@ $(document).ready(function() {
     });
   }
 
+  // render a select categories list for mobile
+  function renderFacetSelect(content) {
+    $('#facetselect').html(function() {
+      return $.map(content.getFacetValues('category'), function(facet) {
+        return '<option>' + facet.name + '</option>';
+      });
+    });
+  }
 
+
+  //display pagination
   function displayPagination(content) {
     var paginationResult = buildPagination(content.page + 1, content.nbPages, 6);
     if(content.nbPages <= 1) {
