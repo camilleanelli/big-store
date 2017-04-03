@@ -1,17 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Big-store is an appstore, here the link to hosted version:
+https://big-store.herokuapp.com/
 
-Things you may want to cover:
-
-* Ruby version
+Ruby version: ruby 2.2.3
+Install rails version  5.0.2
 
 * System dependencies
 
-* Configuration
 
-* Database creation
+
+
+run rake db:create 
+rake db:migrate
 
 * Database initialization
 
