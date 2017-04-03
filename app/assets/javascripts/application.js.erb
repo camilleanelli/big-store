@@ -33,22 +33,23 @@ $(document).ready(function() {
     var currentSearchValue = $(this).val();
     helper.setQuery(currentSearchValue).search();
   });
+
   // handle faceting filters
   $('#facet-list').on('click', 'input[type=checkbox]', function(e) {
     var facetValue = $(this).data('facet');
     helper.toggleRefinement('category', facetValue).search();
   });
-  // display apps by most relevant
-   $(".relevant").on('click', function() {
-    helper.setIndex('big-store').search();
-  });
-  //display apps by lowest ranks
-  $(".lowest-btn").on('click', function() {
-    helper.setIndex('big-store_rank_asc').search();
-  });
-  //display apps by highest ranks
-  $('.highest-btn').on('click', function() {
-    helper.setIndex('big-store_rank_desc').search();
+
+
+  // display apps by ranks and most relevant
+  $("#exampleSelect1").on('change', function() {
+    if($(this).val() === "Most relevant") {
+      helper.setIndex('big-store').search();
+    }else if($(this).val() === "Less populare") {
+      helper.setIndex('big-store_rank_desc').search();
+    } else if($(this).val() === "Popularity") {
+       helper.setIndex('big-store_rank_asc').search();
+    }
   });
 
   //display the hits
@@ -95,7 +96,6 @@ $(document).ready(function() {
       });
     });
   }
-
 
 
   function displayPagination(content) {
