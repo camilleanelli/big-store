@@ -11,7 +11,7 @@ body {
 }
 
 .categories-select {
-  margin-left: 100px;
+  padding-top: 50px;
 }
 
 .div-facets {
@@ -30,7 +30,7 @@ body {
   }
 }
 
-#reset {
+#reset, #reset-mobile {
   font-size: 24px;
   a {
     color: rgb(191, 85, 236) ;
@@ -117,6 +117,10 @@ body {
   padding-top: 50px;
   padding-bottom: 50px;
 
+}
+
+#facetselect {
+  width: 80px;
 }
 
 input {

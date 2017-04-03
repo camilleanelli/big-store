@@ -1,6 +1,6 @@
 # README
 
-Big-store is an appstore, please check the link here:
+Big-store is an appstore, deployed on Heroku, please check the link here:
 https://big-store.herokuapp.com/
 
 Ruby version: ruby 2.2.3

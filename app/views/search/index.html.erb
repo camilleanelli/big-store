@@ -1,9 +1,15 @@
 <div class="spacer"></div>
 <div class="container-fluid">
 	<section class="row">
-	  <input class="mx-auto" type="text" autocomplete="off" id="search-box" placeholder="Search an application" />
+	  	<input class="mx-auto" type="text" autocomplete="off" id="search-box" placeholder="Search an application" />
 	</section>
-
+  <div class="hidden-sm-up row categories-select">
+     <form class="mx-auto form-inline">
+      <label class="filter-select" for="facetselect">Categories: </label>
+      <select class="form-control" id="facetselect"> 
+      </select>
+    </form>
+  </div>
 	<div id="content">
 		<div class="row">
 			<div class="div-facets hidden-xs-down col-xs-12 col-sm-3">

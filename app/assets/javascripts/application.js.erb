@@ -43,7 +43,8 @@ $(document).ready(function() {
 
   //handle facting filters for mobile
   $('#facetselect').on('change', function() {
-    var facetValue = $(this).data('facet');
+    var facetValue = $(this).val();
+    console.log(facetValue);
     helper.toggleRefinement('category', facetValue).search();
   })
 
@@ -58,6 +59,11 @@ $(document).ready(function() {
   $('#reset').on('click', function() {
     helper.clearRefinements('category').search();
   })
+
+  $('#reset-mobile').on('click', function() {
+    helper.clearRefinements('category').search();
+  })
+  
   
 
   // display apps by ranks and most relevant apps
