@@ -20,12 +20,20 @@ body {
   }
 }
 
-.filter-select {
-  font-size: 20px;
+
+.filter-select, .result-select {
+  font-size: 18px;
   margin-left: 20px;
   color: #626262;
   &:hover {
     color: rgb(191, 85, 236);
+  }
+}
+
+#reset {
+  font-size: 24px;
+  a {
+    color: rgb(191, 85, 236) ;
   }
 }
 
@@ -35,11 +43,11 @@ body {
 }
 
 #info-results {
-  margin-top: 15px;
+  margin-top: 10px;
   width: 100%;
   padding-left: 15px;
   p {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 
@@ -101,7 +109,7 @@ body {
 
 
 #content {
-	padding-top: 50px;
+	padding-top: 100px;
 
 }
 
@@ -123,6 +131,10 @@ input {
   box-sizing: border-box;
   color: #626262;
   font-size: 18px;
+}
+
+#select-pages {
+  width: 50px;
 }
 
 #facet-list,
