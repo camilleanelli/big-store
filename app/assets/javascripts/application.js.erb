@@ -43,7 +43,7 @@ $(document).ready(function() {
     helper.toggleRefinement('category', facetValue).search();
   });
 
-  //handle facting filters for mobile
+  //handle faceting filters for mobile
   $('#facetselect').on('change', function() {
     var facetValue = $(this).val();
     helper.toggleRefinement('category', facetValue).search();
@@ -56,16 +56,10 @@ $(document).ready(function() {
     helper.setQueryParameter('hitsPerPage', number).search();
   })
   
-  //button to clear filter categories
-  $('#reset').on('click', function() {
+  //button to clear filter categories 
+  $('#reset, #reset-mobile').on('click', function() {
     helper.clearRefinements('category').search();
   })
-
-  $('#reset-mobile').on('click', function() {
-    helper.clearRefinements('category').search();
-  })
-
-
 
   // display apps by ranks and most relevant apps
   $("#filter-select").on('change', function() {
@@ -73,7 +67,7 @@ $(document).ready(function() {
       helper.setIndex('big-store').search();
     }else if($(this).val() === "Less populare") {
       helper.setIndex('big-store_rank_desc').search();
-    } else if($(this).val() === "Popularity") {
+    } else if($(this).val() === "Most Populare") {
        helper.setIndex('big-store_rank_asc').search();
     }
   });
