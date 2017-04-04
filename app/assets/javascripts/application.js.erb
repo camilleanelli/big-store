@@ -14,12 +14,14 @@
 //= require tether
 //= require bootstrap
 //= require_tree .
+
 $(document).ready(function() {
   var applicationID = "<%= ENV['APPLICATION_ID'] %>";
   var apiKey = "<%= ENV['API_KEY'] %>";
   var indexName = 'big-store';
   var client = algoliasearch(applicationID, apiKey);
-  window.helper = algoliasearchHelper(client, indexName, { facets: ['category'] });
+
+  var helper = algoliasearchHelper(client, indexName, { facets: ['category'] });
   helper.search();
   helper.on('result', function(content) {
     renderFacetList(content);
@@ -44,7 +46,6 @@ $(document).ready(function() {
   //handle facting filters for mobile
   $('#facetselect').on('change', function() {
     var facetValue = $(this).val();
-    console.log(facetValue);
     helper.toggleRefinement('category', facetValue).search();
   })
 
@@ -63,8 +64,8 @@ $(document).ready(function() {
   $('#reset-mobile').on('click', function() {
     helper.clearRefinements('category').search();
   })
-  
-  
+
+
 
   // display apps by ranks and most relevant apps
   $("#filter-select").on('change', function() {
@@ -79,7 +80,6 @@ $(document).ready(function() {
 
   //display the hits
   function renderHits(content) {
-    console.log(content);
     $('#container').html(function() {
       if(content.nbHits > 0) {
         $('.title-facet, #pagination, .result-select, #select-pages, #filter-select, .filter-select, #reset').css('display', 'block');
@@ -97,7 +97,7 @@ $(document).ready(function() {
   function renderHit(hit) {
     return '<div class="col-xs-12 col-sm-6 col-md-4">'+ 
     '<a href="' + hit.link + '" target="_blank">' + 
-      '<div class="ar-1-1" style="height: 200px; margin-bottom:20px; background-image: url(\'https://placeimg.com/175/175/'+hit.name+'\'); background-size: 100%;">'+
+      '<div class="ar-1-1 hit" style="background-image: url(\'https://placeimg.com/175/175/'+hit.name+'\');">'+
         '<div class="filter">'+
           '<p class="title-hit text-white">'+ hit._highlightResult.name.value +'</p>'+
             '<div class="details"><span class="label font-montserrat fs-11">'+ hit.category +'</span></div>'+
@@ -181,8 +181,6 @@ $(document).ready(function() {
     });
     $('.last-page').on('click', function(e) {
       e.preventDefault();
-      console.log(helper);
-      console.log(helper.nbPages);
       helper.setPage(helper.lastResults.nbPages - 1).search();
     });
   }
@@ -230,7 +228,7 @@ $(document).ready(function() {
 
   //display number of results and number of ms
   function infoResults(content) {
-    var html = "<p>" + content.nbHits + " results found in " + content.processingTimeMS + " ms</p>";
+    var html =  "<strong>"+content.nbHits + " results</strong> found in " + content.processingTimeMS + " ms";
     $('#info-results').html(html);
-  } 
+  }
 });

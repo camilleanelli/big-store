@@ -1,66 +1,70 @@
 <div class="spacer"></div>
 <div class="container-fluid">
-	<section class="row">
-	  	<input class="mx-auto" type="text" autocomplete="off" id="search-box" placeholder="Search an application" />
-	</section>
-  <div class="hidden-sm-up row categories-select">
-     <form class="mx-auto form-inline">
+  <section class="row">
+    <input class="mx-auto" type="text" autocomplete="off" id="search-box" placeholder="Search an application" />
+  </section>
+  <div class="hidden-md-up row categories-select">
+    <form class="mx-auto form-inline">
       <!-- <label class="filter-select" for="facetselect">Categories: </label> -->
       <select class="form-control" id="facetselect"> 
       </select>
     </form>
   </div>
-	<div id="content">
-		<div class="row">
-			<div class="div-facets hidden-xs-down col-xs-12 col-sm-3">
-				<div class="row align-items-center">
-					<div class="col-lg-7">
-						<h3 class="title-facet">Categories </h3> 
-					</div>
-					<div id="reset" class="col-lg-5 text-left">
-						<a href="#"><i data-toggle="tooltip" data-placement="top" title="Clear categories" class="fa fa-refresh" aria-hidden="true"></i></a>
-					</div>	
-				</div>
-				<ul id="facet-list"></ul>
-			</div>
+  <div id="content">
+    <div class="row">
+      <div class="div-facets hidden-sm-down  col-xs-12 col-sm-3">
+        <div class="row align-items-center">
+          <div class="col-lg-7">
+            <h3 class="title-facet">Categories</h3>
+          </div>
+          <div id="reset" class="col-lg-5 text-left">
+            <a href="#"><i data-toggle="tooltip" data-placement="top" title="Clear categories" class="fa fa-eraser" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <ul id="facet-list"></ul>
+      </div>
 
-			<div class="col-xs-12 col-sm-9">
-				<div class='row align-items-center'>
-					<div class='col-lg-4'>
-						<div id="info-results"></div>
-					</div>
-					<div class="col-lg-4">
-						<form class="form-inline">
-							<label class="result-select" for="select-pages">Results per page: </label>
-					    <select class="form-control" id="select-pages">
-					    	<option selected>20</option>
-					      <option>5</option>
-					      <option>10</option>
-					      <option>15</option>
-					      <option>50</option>
-					    </select>
-					   </form>
-						</div>
-					<div class="col-lg-4 text-right">
-				    <form class="form-inline">
-					    <label class="filter-select" for="filter-select">Sort by: </label>
-					    <select class="form-control" id="filter-select">
-					    	<option selected>Most relevant</option>
-					      <option>Popularity</option>
-					      <option>Less populare</option>
-					    </select>
-					   </form>
-  					</div>
-		    	</div>
-				<div id="container" class="row"></div>
-			</div>
-		</div>
+      <div class="col-xs-12 col-sm-12 col-md-9">
+        <div class="row align-items-center">
+        <div class="col-lg-3">
+          <div id="info-results"></div>
+        </div>
+        <div class="col-lg-9">
+          <div class="pull-right">
+            <form class="form-inline">
+              <select class="form-control" id="select-pages">
+                <option>5</option>
+                <option>10</option>
+                <option>15</option>
+                <option selected>20</option>
+                <option>50</option>
+              </select>
+              <label class="result-select" for="select-pages">per page</label>
+            </form>
+          </div>
+          <div class="pull-right">
+            <form class="form-inline">
+              <select class="form-control" id="filter-select">
+                <option selected>Most relevant</option>
+                <option>Most Populare</option>
+                <option>Less populare</option>
+              </select>
+            </form>
+          </div>
+        </div>
 
-		<div id="pagination" class="row">
-		  <nav aria-label="Page navigation example" class="mx-auto">
-		    <ul class="pagination"></ul>
-		  </nav>
-		</div>
-	</div>
+        </div>
+
+
+        <div id="container" class="row"></div>
+
+        <div id="pagination" class="row">
+          <nav aria-label="Page navigation example" class="">
+            <ul class="pagination"></ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
