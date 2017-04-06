@@ -81,8 +81,9 @@ $(document).ready(function() {
           return renderHit(hit);
        });
       }else {
-        $('.title-facet, #pagination, .result-select, #select-pages, #exampleSelect1, .filter-select, #reset').css('display', 'none');
-        return '<div class="text-center"><h3>Sorry, no apps found :(</h3></div>';
+        $('.title-facet, #pagination, .result-select, #select-pages, #exampleSelect1, #filter-select, #reset').css('display', 'none');
+        return '<div class="text-center"><h3>Sorry, no apps found :(</h3>' +
+        '<h1> ❨╯°□°❩╯︵┻━┻</h1></div>';
       }
     });
   }
