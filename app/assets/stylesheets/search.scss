@@ -19,7 +19,13 @@ body {
   }
 }
 
+.width-200 {
+  width: 50%;
+}
 
+.fs-40 {
+  font-size: 40px;
+}
 
 .fl-left {
   float: left;
@@ -28,6 +34,10 @@ body {
 
 .pd-15 {
   padding-right: 15px;
+}
+
+.pd-100 {
+  padding-top: 100px;
 }
 
 #info-results {
