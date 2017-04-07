@@ -67,7 +67,7 @@ $(document).ready(function() {
       helper.setIndex('big-store').search();
     }else if($(this).val() === "Less populare") {
       helper.setIndex('big-store_rank_desc').search();
-    } else if($(this).val() === "Most Populare") {
+    } else if($(this).val() === "Most populare") {
        helper.setIndex('big-store_rank_asc').search();
     }
   });
@@ -90,7 +90,7 @@ $(document).ready(function() {
 
   // html code for a hit
   function renderHit(hit) {
-    return '<div class="col-xs-12 col-sm-6 col-md-4">'+ 
+    return '<div class="hit-card col-xs-12 col-sm-6 col-md-4">'+ 
     '<a href="' + hit.link + '" target="_blank">' + 
       '<div class="ar-1-1 hit" style="background-image: url(\'https://placeimg.com/175/175/'+hit.name+'\');">'+
         '<div class="filter">'+
