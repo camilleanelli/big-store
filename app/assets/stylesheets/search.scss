@@ -46,7 +46,11 @@ input {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background: url("loupe.svg") 98% / 30px no-repeat white;
+  background-image: url("loupe.svg");
+  background-position: 98%;
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-color: white;
 }
 
 
