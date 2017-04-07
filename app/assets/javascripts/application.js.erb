@@ -10,7 +10,6 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
 //= require tether
 //= require bootstrap
 //= require_tree .
@@ -31,26 +30,16 @@ $(document).ready(function() {
     renderFacetSelect(content);
   });
 
+
+
   // trigger search with the search input
   $('#search-box').on('keyup', function() {
     var currentSearchValue = $(this).val();
     helper.setQuery(currentSearchValue).search();
   });
 
-  // handle faceting filters
-  $('#facet-list').on('click', 'input[type=checkbox]', function(e) {
-    var facetValue = $(this).data('facet');
-    helper.toggleRefinement('category', facetValue).search();
-  });
 
-  //handle faceting filters for mobile
-  $('#facetselect').on('change', function() {
-    var facetValue = $(this).val();
-    helper.toggleRefinement('category', facetValue).search();
-  })
-
-
-  //select to render number of results the user wants to display
+  //select to render number of results per page the user wants to display
   $('#select-pages').on('change', function() {
     var number = $(this).val();
     helper.setQueryParameter('hitsPerPage', number).search();
@@ -72,63 +61,6 @@ $(document).ready(function() {
     }
   });
 
-  //display the hits
-  function renderHits(content) {
-    $('#container').html(function() {
-      if(content.nbHits > 0) {
-        $('.categories-select, #info-results, .title-facet, #pagination, .result-select, #select-pages, #filter-select, .filter-select, #reset').css('display', 'block');
-        return $.map(content.hits, function(hit) {
-          return renderHit(hit);
-       });
-      }else {
-        $('.categories-select, #info-results, .title-facet, #pagination, .result-select, #select-pages, #filter-select, .filter-select, #reset').css('display', 'none');
-        return '<div class="text-center pd-100 col-sm-8 offset-xs-1"><p>Sorry, no apps found </p>' +
-        '<br><p class="fs-40"> ❨╯°□°❩╯︵┻━┻</p></div>';
-      }
-    });
-  }
-
-  // html code for a hit
-  function renderHit(hit) {
-    return '<div class="hit-card col-xs-12 col-sm-6 col-md-4">'+ 
-    '<a href="' + hit.link + '" target="_blank">' + 
-      '<div class="ar-1-1 hit" style="background-image: url(\'https://placeimg.com/175/175/'+hit.name+'\');">'+
-        '<div class="filter">'+
-          '<p class="title-hit text-white">'+ hit._highlightResult.name.value +'</p>'+
-            '<div class="details"><span class="label font-montserrat fs-11">'+ hit.category +'</span></div>'+
-            '<div class="text-white link">Buy now!</div>' +
-          '</div>'+
-        '</div>' +
-      '</a>' +
-    '</div>'
-  }
-
-  //display categories list
-  function renderFacetList(content) {
-    $('#facet-list').html(function() {
-      return $.map(content.getFacetValues('category'), function(facet) {
-        var checkbox = $('<input type=checkbox>')
-          .data('facet', facet.name)
-          .attr('id', 'fl-' + facet.name);
-        if(facet.isRefined) checkbox.attr('checked', 'checked');
-        var label = $('<label>').html(facet.name + ' (' + facet.count + ')')
-          .attr('for', 'fl-' + facet.name);
-        return  $('<li>').append(checkbox).append(label);
-      });
-    });
-  }
-
-  // render a select categories list for mobile
-  function renderFacetSelect(content) {
-      var html = '<option selected>Choose category</option>';
-      $.map(content.getFacetValues('category'), function(facet) {
-        return html +='<option>' + facet.name + '</option>';
-      });
-      $("#facetselect").html(html);
-   }
-
-
-  //display pagination
   function displayPagination(content) {
     var paginationResult = buildPagination(content.page + 1, content.nbPages, 6);
     if(content.nbPages <= 1) {
@@ -220,10 +152,5 @@ $(document).ready(function() {
   function displayPageItem(cssClass, text) {
     return '<li class="page-item"><a class="page-link '+ cssClass +'" href="#">'+ text +'</a></li>';
   }
-
-  //display number of results and number of ms
-  function infoResults(content) {
-    var html =  "<strong>"+content.nbHits + " results</strong> found in " + content.processingTimeMS + " ms";
-    $('#info-results').html(html);
-  }
+ 
 });
