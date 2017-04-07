@@ -3,21 +3,74 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+//body 
 body {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
 }
 
+
+#content {
+  padding-top: 50px;
+
+}
+
+// header 
+#header {
+  position: fixed;
+  width: 100%;
+  background-color: white;
+  border-bottom: 1px solid rgba(230,230,230,0.7);
+  z-index: 800;
+  h1 {
+    font-weight: bold;
+    margin-left: 20px;
+  }
+}
+
+// feature search box
+
+input {
+  color: black;
+}
+
+#search-box {
+  width: 50%;
+  padding: 10px;
+  border: 2px solid rgb(191, 85, 236);
+  border-radius: 50px;
+  box-sizing: border-box;
+  color: #626262;
+  font-size: 18px;
+}
+
+
+//feature select forms categories and 
+
 .categories-select {
   padding-top: 50px;
 }
 
-.div-facets {
-  .title-facet {
-    margin-left: 30px;
+.info
+.filter-select, .result-select {
+  font-size: 18px;
+  margin-left: 10px;
+  color: #626262;
+  &:hover {
+    color: rgb(191, 85, 236);
   }
 }
+
+.form-control {
+  color: rgb(191, 85, 236) !important;
+}
+
+#select-pages {
+  width: 45px;
+}
+
+// reusable css
 
 .width-200 {
   width: 50%;
@@ -40,26 +93,24 @@ body {
   padding-top: 100px;
 }
 
+.spacer {
+  height: 100px;
+}
+
+
+//feature display info results
+
 #info-results {
   padding-left: 20px;
 }
 
-.select
 
-.info
-.filter-select, .result-select {
-  font-size: 18px;
-  margin-left: 10px;
-  color: #626262;
-  &:hover {
-    color: rgb(191, 85, 236);
-  }
-
-}
-
+// feature clear categories 
 #reset {
   padding-left: 10px;
 }
+
+
 #reset, #reset-mobile {
   font-size: 20px;
   a {
@@ -67,13 +118,66 @@ body {
   }
 }
 
-.form-control {
-  color: rgb(191, 85, 236) !important;
-  margin-left: 20px;
+// feature pagination
+
+#pagination {
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
-.padding-sections {
-  padding: 20px 20px;
+.pagination {
+  align-items: center;
+  justify-content: center;
+}
+
+
+// dislay categories list
+
+.div-facets {
+  .title-facet {
+    margin-left: 30px;
+  }
+}
+
+#facet-list li {
+  padding-left: 6px;
+  padding: 6px 0;
+  border-bottom: 1px solid #ccc;
+  &:hover {
+    color: rgba(191, 85, 236, 0.7);
+  }
+}
+
+#facet-list {
+  margin: auto;
+  list-style: none;
+}
+
+#facet-list li input {
+  margin-right: 6px;
+}
+
+//display apps 
+
+#container li {
+  padding: 8px 0;
+}
+
+#container em {
+  background: rgb(191, 85, 236);
+}
+
+#container {
+  margin: auto;
+  padding-top: 10px;
+}
+
+.hit {
+  height: 200px;
+  margin-bottom:20px;
+  background-size: 100%;
+  background-color: black;
+  background-repeat: no-repeat;
 }
 
 .filter {
@@ -107,68 +211,6 @@ body {
   font-weight: bold;
 }
 
-.spacer {
-  height: 100px;
-}
-
-.items {
-  background-color: #ccc;
-  border: 5px solid white;
-  border-radius: 10px;
-}
-
-#header {
-  position: fixed;
-  width: 100%;
-  background-color: white;
-  border-bottom: 1px solid rgba(230,230,230,0.7);
-  z-index: 800;
-  h1 {
-    font-weight: bold;
-    margin-left: 20px;
-  }
-}
-
-
-#content {
-  padding-top: 50px;
-
-}
-
-#pagination {
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
-
-.pagination {
-  align-items: center;
-  justify-content: center;
-}
-
-input {
-  color: black;
-}
-
-#search-box {
-  width: 50%;
-  padding: 10px;
-  border: 2px solid rgb(191, 85, 236);
-  border-radius: 50px;
-  box-sizing: border-box;
-  color: #626262;
-  font-size: 18px;
-}
-
-#select-pages {
-  width: 45px;
-}
-
-#facet-list,
-#container{
-  margin: auto;
-  list-style: none;
-}
-
 .page-link {
   color: rgb(191, 85, 236) !important;
 }
@@ -179,36 +221,4 @@ input {
   background-color: rgb(191, 85, 236) !important;
   border-color: rgb(191, 85, 236) !important;
   color: white !important;
-}
-
-#facet-list li {
-  padding-left: 6px;
-  padding: 6px 0;
-  border-bottom: 1px solid #ccc;
-  &:hover {
-    color: rgba(191, 85, 236, 0.7);
-  }
-}
-#facet-list li input {
-  margin-right: 6px;
-}
-
-#container li {
-  padding: 8px 0;
-}
-
-#container em {
-  background: rgb(191, 85, 236);
-}
-
-#container {
-  padding-top: 10px;
-}
-
-.hit {
-  height: 200px;
-  margin-bottom:20px;
-  background-size: 100%;
-  background-color: black;
-  background-repeat: no-repeat;
 }
