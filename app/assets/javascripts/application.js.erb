@@ -31,8 +31,7 @@ $(document).ready(function() {
   });
 
 
-
-  // trigger search with the search input
+ // trigger search with the search input
   $('#search-box').on('keyup', function() {
     var currentSearchValue = $(this).val();
     helper.setQuery(currentSearchValue).search();
