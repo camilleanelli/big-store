@@ -37,12 +37,16 @@ input {
 
 #search-box {
   width: 50%;
-  padding: 10px;
   border: 2px solid rgb(191, 85, 236);
   border-radius: 50px;
   box-sizing: border-box;
   color: #626262;
   font-size: 18px;
+  padding: 10px 50px 10px 10px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url("loupe.svg") 98% / 30px no-repeat white;
 }
 
 
