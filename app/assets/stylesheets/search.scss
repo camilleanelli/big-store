@@ -46,11 +46,7 @@ input {
 }
 
 
-//feature select forms categories and 
-
-.categories-select {
-  padding-top: 50px;
-}
+//feature select forms categories, filters, per page
 
 .info
 .filter-select, .result-select {
@@ -62,18 +58,51 @@ input {
   }
 }
 
+
 .form-control {
   color: rgb(191, 85, 236) !important;
 }
 
+#filter-select {
+  width: 150px;
+}
+
+  
+#select-pages, #filter-select, #facetselect {
+  border-radius: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url("arrow-select.svg") 95% / 32px no-repeat white;
+}
+
 #select-pages {
-  width: 45px;
+  width: 80px;
+  padding: 5px 35px 5px 5px;
+}
+
+#filter-select {
+  width: 160px;
+  padding: 5px 50px 5px 5px;
+}
+
+#facetselect {
+  width: 250px;
 }
 
 // reusable css
 
-.width-200 {
-  width: 50%;
+.pd-top-50 {
+  padding-top: 50px;
+
+}
+
+
+
+.mr-auto {
+  margin: 0 auto;
 }
 
 .fs-40 {
@@ -133,7 +162,7 @@ input {
 
 .div-facets {
   .title-facet {
-    margin-left: 30px;
+    margin-left: 50px;
   }
 }
 
