@@ -29,8 +29,9 @@ $(document).ready(function() {
     displayPagination(content);
     infoResults(content);
     renderFacetSelect(content);
-  });
+    });
 
+  
   // trigger search with the search input
   $('#search-box').on('keyup', function() {
     var currentSearchValue = $(this).val();
@@ -43,20 +44,24 @@ $(document).ready(function() {
     helper.toggleRefinement('category', facetValue).search();
   });
 
-  //handle faceting filters for mobile
+  // handle faceting filters for mobile
   $('#facetselect').on('change', function() {
     var facetValue = $(this).val();
     helper.toggleRefinement('category', facetValue).search();
+    // reset on default option
+    if(facetValue === "") {
+      helper.clearRefinements('category').search();
+    } 
   })
 
 
-  //select to render number of results the user wants to display
+  // select to render number of results the user wants to display
   $('#select-pages').on('change', function() {
     var number = $(this).val();
     helper.setQueryParameter('hitsPerPage', number).search();
   })
   
-  //button to clear filter categories 
+  // button to clear filter categories 
   $('#reset, #reset-mobile').on('click', function() {
     helper.clearRefinements('category').search();
   })
@@ -65,7 +70,7 @@ $(document).ready(function() {
   $("#filter-select").on('change', function() {
     if($(this).val() === "Most relevant") {
       helper.setIndex('big-store').search();
-    }else if($(this).val() === "Less populare") {
+    } else if($(this).val() === "Less populare") {
       helper.setIndex('big-store_rank_desc').search();
     } else if($(this).val() === "Most populare") {
        helper.setIndex('big-store_rank_asc').search();
@@ -120,11 +125,15 @@ $(document).ready(function() {
 
   // render a select categories list for mobile
   function renderFacetSelect(content) {
-      var html = '<option selected>Choose category</option>';
-      $.map(content.getFacetValues('category'), function(facet) {
-        return html +='<option>' + facet.name + '</option>';
-      });
-      $("#facetselect").html(html);
+    var categories = content.getFacetValues('category');
+    var selectedCategory = (categories.length == 1) ?  "selected" : "";
+    var html = "";
+    html += '<option selected value="">Choose a category</option>';
+    $.map(categories, function(facet) {
+      html += '<option '+selectedCategory+'>' + facet.name + '</option>';        
+    });
+    $("#facetselect").html(html);
+
    }
 
 
@@ -135,7 +144,7 @@ $(document).ready(function() {
       return;
     }
     var html = "";
-    // not on the first page
+    // no 'previous' on the first page
     if( content.page !== 0) {
       html += displayPageItem('previous', 'Previous');
     }
