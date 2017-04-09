@@ -4,12 +4,18 @@
     <input class="mx-auto" type="text" autocomplete="off" id="search-box" placeholder="Search an application" />
   </section>
   <div class="hidden-md-up row pd-top-50">
-    <form class="mx-auto form-inline">
+    <form class="form-inline mx-auto">
       <select class="form-control" id="facetselect"></select>
     </form>
   </div>
-  
+  <div class="hidden-md-up pd-top-20 row">
+    <div class="mx-auto" id="reset-mobile">
+      <a href="#"><i class="fa fa-times" aria-hidden="true"></i> Clear</a>
+    </div>
   </div>
+    
+  
+ 
   <div id="content">
     <div class="mg-0 row">
       <div class="div-facets hidden-sm-down  col-xs-12 col-sm-3">
@@ -18,7 +24,7 @@
             <h3 class="title-facet">Categories</h3>
           </div>
           <div id="reset">
-            <a href="#"><i data-toggle="tooltip" data-placement="top" title="Clear categories" class="fa fa-eraser" aria-hidden="true"></i></a>
+            <a href="#"><i data-toggle="tooltip" data-placement="top" title="Clear categories" class="fa fa-times" aria-hidden="true"></i></a>
           </div>
         </div>
         <ul id="facet-list"></ul>
