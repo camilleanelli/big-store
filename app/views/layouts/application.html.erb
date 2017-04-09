@@ -12,16 +12,20 @@
   </head>
 
   <body>
-    <div id="header">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="brand"><a href="/"><h1>BigStore</h1></a></div>
-          <div class="hidden-sm-up text-right" style="margin-left: 200px" id="reset-mobile">
+    <div id="header" class="container">
+      <div class="row align-items-center">
+        <div class="brand col-6">
+          <a href="/"><h1>BigStore</h1></a>
+        </div>
+        <div class="col-6 hidden-md-up" id="reset-mobile">
+          <div class="pull-right">
             <a href="#"><i class="fa fa-eraser" aria-hidden="true"></i></a>
           </div>
+          
         </div>
       </div>
     </div>
+   
 
     <div>
       <%= yield %>
