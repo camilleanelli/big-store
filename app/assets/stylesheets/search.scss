@@ -40,7 +40,7 @@ input {
   border-radius: 50px;
   box-sizing: border-box;
   color: #626262;
-  font-size: 18px;
+  font-size: 16px;
   padding: 10px 50px 10px 10px;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -57,7 +57,7 @@ input {
 
 .info
 .filter-select, .result-select {
-  font-size: 18px;
+  font-size: 16px;
   margin-left: 10px;
   color: #626262;
   &:hover {
@@ -86,7 +86,7 @@ input {
 }
 
 #select-pages {
-  width: 80px;
+  width: 60px;
   padding: 5px 35px 5px 5px;
 }
 
@@ -96,7 +96,7 @@ input {
 }
 
 #facetselect {
-  width: 250px;
+ width: 200px;
 }
 
 // reusable css
@@ -104,6 +104,10 @@ input {
 .pd-top-50 {
   padding-top: 50px;
 
+}
+
+.pd-top-20 {
+  padding-top: 20px;
 }
 
 .mg-0 {
@@ -171,7 +175,7 @@ input {
 
 .div-facets {
   .title-facet {
-    margin-left: 50px;
+    margin-left: 45px;
   }
 }
 
