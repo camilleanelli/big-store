@@ -125,6 +125,9 @@ input {
 
 // reusable css
 
+.color-font {
+  color: rgb(191, 85, 236);
+}
 .pd-top-50 {
   padding-top: 50px;
 
@@ -232,7 +235,7 @@ input {
 .results-mobile {
   font-size: 16px;
   border-bottom: 1px solid #ccc;
-  padding-bottom: 5px;
+  padding-bottom: 10px;
   a {
     color: #2c2c2c;
   }
