@@ -16,17 +16,29 @@
 
   // html code for a hit
   function renderHit(hit) {
-    return '<div class="hit-card col-xs-12 col-sm-6 col-md-4">'+ 
+    return '<div class="hidden-xs-down hit-card col-xs-12 col-sm-6 col-md-4">'+ 
     '<a href="' + hit.link + '" target="_blank">' + 
       '<div class="ar-1-1 hit" style="background-image: url(\'https://placeimg.com/175/175/'+hit.name+'\');">'+
         '<div class="filter">'+
-          '<p class="title-hit text-white">'+ hit._highlightResult.name.value +'</p>'+
+          '<p class="title-hit text-white">'+ hit._highlightResult.name.value.substring(0,20) +'</p>'+
             '<div class="details"><span class="label font-montserrat fs-11">'+ hit.category +'</span></div>'+
             '<div class="text-white link">Buy now!</div>' +
           '</div>'+
         '</div>' +
       '</a>' +
-    '</div>'
+    '</div>' +
+    '<div class="hidden-sm-up col-12 pd-top-20 results-mobile">' + 
+      '<a href="' + hit.link + '" target="_blank">' +
+        '<div class="row">' +   
+          '<div class="col-2 img-hit-mobile" style="background-image: url(\'https://placeimg.com/100/100/'+hit.name+'\');">' + 
+        '</div>' +
+          '<div class="col-7">' + hit._highlightResult.name.value.substring(0,20) + 
+            '<p class="color-font">Show more</p>' +
+          '</div>' +
+          '<div class="col-3"><span class="label font-montserrat fs-11">'+ hit.category +'</span></div>' +
+        '</div>' + 
+      '</a>' + 
+    '</div>';
   }
 
   // select number of results per page 

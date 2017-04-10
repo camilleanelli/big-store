@@ -9,9 +9,9 @@ RSpec.describe "search page", :type => :feature do
     expect(page).to have_content 'Alaska Airlines'
   end
 
-  it 'display 20 hits per page', js: true do
+  it 'display 10 hits per page', js: true do
     within('div#container') do
-      expect(page).to have_selector('div.hit-card', count: 20)
+      expect(page).to have_selector('div.hit-card', count: 10)
     end
   end
 
