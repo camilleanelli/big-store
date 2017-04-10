@@ -13,6 +13,7 @@
 //= require jquery_ujs
 //= require tether
 //= require bootstrap
+//= require pagination
 //= require_tree .
 
 $(document).ready(function() {
@@ -23,216 +24,20 @@ $(document).ready(function() {
 
   var helper = algoliasearchHelper(client, indexName, { facets: ['category'] });
   helper.search();
+  BigStore.attachPaginationListener(helper);
+  triggerResultsCategories(helper);
+  triggerResultsCategoryOnMobile(helper);
+  resultsPerPage(helper);
+
   helper.on('result', function(content) {
+    triggerValueSearch(helper)
     renderFacetList(content);
     renderHits(content);
-    displayPagination(content);
+    displayByRanks(helper)
+    BigStore.displayPagination(helper, content);
     infoResults(content);
     renderFacetSelect(content);
-    });
+    resetCategories(helper);
 
-  
-  // trigger search with the search input
-  $('#search-box').on('keyup', function() {
-    var currentSearchValue = $(this).val();
-    helper.setQuery(currentSearchValue).search();
   });
-
-  // handle faceting filters
-  $('#facet-list').on('click', 'input[type=checkbox]', function(e) {
-    var facetValue = $(this).data('facet');
-    helper.toggleRefinement('category', facetValue).search();
-  });
-
-  // handle faceting filters for mobile
-  $('#facetselect').on('change', function() {
-    var facetValue = $(this).val();
-    helper.toggleRefinement('category', facetValue).search();
-    // reset on default option
-    if(facetValue === "") {
-      helper.clearRefinements('category').search();
-    } 
-  })
-
-
-  // select to render number of results the user wants to display
-  $('#select-pages').on('change', function() {
-    var number = $(this).val();
-    helper.setQueryParameter('hitsPerPage', number).search();
-  })
-  
-  // button to clear filter categories 
-  $('#reset, #reset-mobile').on('click', function() {
-    helper.clearRefinements('category').search();
-  })
-
-  // display apps by ranks and most relevant apps
-  $("#filter-select").on('change', function() {
-    if($(this).val() === "Most relevant") {
-      helper.setIndex('big-store').search();
-    } else if($(this).val() === "Less populare") {
-      helper.setIndex('big-store_rank_desc').search();
-    } else if($(this).val() === "Most populare") {
-       helper.setIndex('big-store_rank_asc').search();
-    }
-  });
-
-  //display the hits
-  function renderHits(content) {
-    $('#container').html(function() {
-      if(content.nbHits > 0) {
-        $('.categories-select, #info-results, .title-facet, #pagination, .result-select, #select-pages, #filter-select, .filter-select, #reset').css('display', 'block');
-        return $.map(content.hits, function(hit) {
-          return renderHit(hit);
-       });
-      }else {
-        $('.categories-select, #info-results, .title-facet, #pagination, .result-select, #select-pages, #filter-select, .filter-select, #reset').css('display', 'none');
-        return '<div class="text-center pd-100 col-sm-8 offset-xs-1"><p>Sorry, no apps found </p>' +
-        '<br><p class="fs-40"> ❨╯°□°❩╯︵┻━┻</p></div>';
-      }
-    });
-  }
-
-  // html code for a hit
-  function renderHit(hit) {
-    return '<div class="hit-card col-xs-12 col-sm-6 col-md-4">'+ 
-    '<a href="' + hit.link + '" target="_blank">' + 
-      '<div class="ar-1-1 hit" style="background-image: url(\'https://placeimg.com/175/175/'+hit.name+'\');">'+
-        '<div class="filter">'+
-          '<p class="title-hit text-white">'+ hit._highlightResult.name.value +'</p>'+
-            '<div class="details"><span class="label font-montserrat fs-11">'+ hit.category +'</span></div>'+
-            '<div class="text-white link">Buy now!</div>' +
-          '</div>'+
-        '</div>' +
-      '</a>' +
-    '</div>'
-  }
-
-  //display categories list
-  function renderFacetList(content) {
-    $('#facet-list').html(function() {
-      return $.map(content.getFacetValues('category'), function(facet) {
-        var checkbox = $('<input type=checkbox>')
-          .data('facet', facet.name)
-          .attr('id', 'fl-' + facet.name);
-        if(facet.isRefined) checkbox.attr('checked', 'checked');
-        var label = $('<label>').html(facet.name + ' (' + facet.count + ')')
-          .attr('for', 'fl-' + facet.name);
-        return  $('<li>').append(checkbox).append(label);
-      });
-    });
-  }
-
-  // render a select categories list for mobile
-  function renderFacetSelect(content) {
-    var categories = content.getFacetValues('category');
-    var selectedCategory = (categories.length == 1) ?  "selected" : "";
-    var html = "";
-    html += '<option selected value="">Choose a category</option>';
-    $.map(categories, function(facet) {
-      html += '<option '+selectedCategory+'>' + facet.name + '</option>';        
-    });
-    $("#facetselect").html(html);
-
-   }
-
-
-  //display pagination
-  function displayPagination(content) {
-    var paginationResult = buildPagination(content.page + 1, content.nbPages, 6);
-    if(content.nbPages <= 1) {
-      return;
-    }
-    var html = "";
-    // no 'previous' on the first page
-    if( content.page !== 0) {
-      html += displayPageItem('previous', 'Previous');
-    }
-    // go to the beginning
-    if(!paginationResult.startFromFirstPage) {
-      html += displayPageItem('first-page', '<<');
-    }
-    for(var i = 0; i < paginationResult.pages.length; i++) {
-      var pageItem = paginationResult.pages[i];
-      var activeClass = pageItem.isCurrent ? "active" : "";
-      html += '<li class="page-item '+ activeClass +'"><a class="page-link numbers " href="#">' + pageItem.page + '</a></li>';
-    }
-    // go to the beginning
-    if(!paginationResult.endAtLastPage) {
-      html += displayPageItem('last-page', '>>');
-    }
-    // not on the last page
-    if(content.page + 1 !== content.nbPages) {
-      html += displayPageItem('next', 'Next');
-    }
-    $('.pagination').html(html);
-    $('.numbers').on('click', function(e) {
-      e.preventDefault();
-      var link = parseInt($(this).text()) - 1;
-      helper.setPage(link).search();
-    });
-    $('.previous').on('click', function(e) {
-      e.preventDefault();
-      helper.previousPage().search();
-    });
-    $('.next').on('click', function(e) {
-      e.preventDefault();
-      helper.nextPage().search();
-    });
-    $('.first-page').on('click', function(e) {
-      e.preventDefault();
-      helper.setPage(0).search();
-    });
-    $('.last-page').on('click', function(e) {
-      e.preventDefault();
-      helper.setPage(helper.lastResults.nbPages - 1).search();
-    });
-  }
-
-  // https://gist.github.com/trantorLiu/5924389
-  function buildPagination(currentPage, totalPage, size) {
-    var startPage, endPage, context;
-    startPage = currentPage - Math.floor(size / 2);
-    endPage = currentPage + Math.floor(size / 2);
-    if (startPage <= 0) {
-      endPage -= (startPage - 1);
-      startPage = 1;
-    }
-    if (endPage > totalPage) {
-      endPage = totalPage;
-      if (endPage - size + 1 > 0) {
-        startPage = endPage - size + 1;
-      } else {
-        startPage = 1;
-      }
-    }
-    context = {
-      startFromFirstPage: false,
-      pages: [],
-      endAtLastPage: false,
-    };
-    if (startPage === 1) {
-      context.startFromFirstPage = true;
-    }
-    for (var i = startPage; i <= endPage; i++) {
-      context.pages.push({
-        page: i,
-        isCurrent: i === currentPage,
-      });
-    }
-    if (endPage === totalPage) {
-      context.endAtLastPage = true;
-    }
-    return context;
-  }
-
-  function displayPageItem(cssClass, text) {
-    return '<li class="page-item"><a class="page-link '+ cssClass +'" href="#">'+ text +'</a></li>';
-  }
-
-  //display number of results and number of ms
-  function infoResults(content) {
-    var html =  "<strong>"+content.nbHits + " results</strong> found in " + content.processingTimeMS + " ms";
-    $('#info-results').html(html);
-  }
 });
