@@ -20,3 +20,9 @@ Run the command:
 - rake db:migrate
 - bundle exec rails server
 
+To run the tests: 
+
+- bundle exec rspec
+
+Here the demo to show you the tests are working.
+https://giphy.com/gifs/xUA7aKDiDwZljTmSVW/html5
