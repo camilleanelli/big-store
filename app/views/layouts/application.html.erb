@@ -8,7 +8,6 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application' %>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.css">
-    <!--  <script src="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.js"></script> -->
   </head>
 
   <body>
@@ -16,6 +15,11 @@
       <div class="row align-items-center">
         <div class="brand col-6">
           <a href="/"><h1>BigStore</h1></a>
+        </div>
+        <div class="hidden-md-up col-6">
+          <div class="pull-right" id="reset-mobile">
+            <a href="#"><i class="fa fa-times" aria-hidden="true"></i> Clear</a>
+          </div>
         </div>
       </div>
     </div>
