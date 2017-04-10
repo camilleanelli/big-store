@@ -238,6 +238,9 @@ input {
   padding-bottom: 10px;
   a {
     color: #2c2c2c;
+    &:visited, &:hover {
+      color: #2c2c2c;
+    }
   }
 }
 
