@@ -35,11 +35,24 @@ $(document).ready(function() {
   });
 
   // trigger search results
-  $('#search-box').on('keyup',function() {
+  $('#search-box').on('keyup', debounce(function(e) {
     var currentSearchValue = $(this).val();
     helper.setQuery(currentSearchValue).search();
-  });
+  }, 400));
 
+  // debounce() function to limit number of queries
+  //www.grafikart.fr/tutoriels/javascript/debounce-throttle-642
+  function debounce(callback, delay){
+    var timer;
+    return function(){
+      var args = arguments;
+      var context = this;
+      clearTimeout(timer);
+      timer = setTimeout(function(){
+          callback.apply(context, args);
+      }, delay)
+    }
+  }
 
   //display categories list
   function renderFacetList(content) {
