@@ -22,6 +22,7 @@ function debounce(callback, delay){
 
 //display the hits
 function renderHits(content) {
+  console.log(content);
   $('#container').html(function() {
     if(content.nbHits > 0) {
       $('.categories-select, #info-results, .title-facet, #pagination, .result-select, #select-pages, #filter-select, .filter-select, #reset').css('display', 'block');

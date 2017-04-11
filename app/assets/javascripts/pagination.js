@@ -2,10 +2,10 @@ window.BigStore || (window.BigStore = {});
 
 //display pagination
 BigStore.displayPagination = function(helper, content) {
-  var paginationResult = BigStore.buildPagination(content.page + 1, content.nbPages, 6);
   if(content.nbPages <= 1) {
     return;
   }
+  var paginationResult = BigStore.buildPagination(content.page + 1, content.nbPages, 5);
   var html = "";
   // no 'previous' on the first page
   if( content.page !== 0) {
