@@ -1,4 +1,4 @@
-// trigger results of the search box
+// add listener keyup on search box
 function triggerSearch(helper) {
   $('#search-box').on('keyup', debounce(function(e) {
     var currentSearchValue = $(this).val();
@@ -22,7 +22,6 @@ function debounce(callback, delay){
 
 //display the hits
 function renderHits(content) {
-  console.log(content);
   $('#container').html(function() {
     if(content.nbHits > 0) {
       $('.categories-select, #info-results, .title-facet, #pagination, .result-select, #select-pages, #filter-select, .filter-select, #reset').css('display', 'block');
