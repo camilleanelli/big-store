@@ -22,7 +22,7 @@ $(document).ready(function() {
   var indexName = 'big-store';
   var client = algoliasearch(applicationID, apiKey);
 
-  var helper = algoliasearchHelper(client, indexName, { facets: ['category'] });
+  var helper = algoliasearchHelper(client, indexName, { disjunctiveFacets: ['category'] });
   helper.search();
   BigStore.attachPaginationListener(helper);
 
@@ -33,7 +33,7 @@ $(document).ready(function() {
     infoResults(content);
     renderFacetSelect(content);
   });
-    
+
   triggerSearch(helper);
   triggerCategoriesResults(helper);
   triggerCategoriesMobile(helper); 
